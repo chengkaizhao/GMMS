@@ -1,0 +1,148 @@
+﻿
+<!DOCTYPE html>
+<html>
+
+<body>
+    @Scripts.Render("~/bundles/layui")
+
+    <div class="layui-form layui-form-pane1" action="" lay-filter="first">
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">图件名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="Drawing_title" lay-verify="required" placeholder="请输入图件名称" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">请务必填写图件名称</div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">图件作者</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="Drawing_author" lay-verify="required" placeholder="请输入图件作者" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">请务必填写图件作者</div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">图件类型</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="Drawing_type" value="平面图" title="平面图" checked="">
+                    <input type="radio" name="Drawing_type" value="钻孔柱状图" title="钻孔柱状图">
+                    <input type="radio" name="Drawing_type" value="其它" title="其它">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">真实姓名</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="User_realname" placeholder="请输入真实姓名" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux"></div>
+            </div>
+
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                <legend>选完文件后不自动上传</legend>
+            </fieldset>
+
+            <div class="layui-upload">
+                <button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>
+                <button type="button" class="layui-btn" id="test9">开始上传</button>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="sub">立即提交</button>
+                    <button onclick="parent.layer.closeAll()" class="layui-btn layui-btn-primary">关闭</button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    @Styles.Render("~/Scripts/css")
+    <script>
+        layui.use('upload', function () {
+            var $ = layui.jquery
+                , upload = layui.upload;
+            
+    </script>
+    <script type="text/javascript">
+            layui.use(['form', 'upload'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            layedit = layui.layedit,
+            laydate = layui.laydate,
+            upload = layui.upload
+            $ = layui.$;
+
+            //选完文件后不自动上传
+            @*upload.render({
+                elem: '#test8'
+                , url: "@Url.Action("UploadController/FilesUpload")" //改成您自己的上传接口
+                , auto: false
+                //,multiple: true
+                , bindAction: '#test9'
+                ,exts: 'dwg|dwf|dwfx' //只允许上传压缩文件
+                , done: function (res) {
+                    layer.msg('上传成功');
+                    console.log(res)
+                }
+            });*@        
+        form.on("submit(sub)", function (obj) {
+
+            console.log(obj);
+            var drawing = obj.field;
+
+            layer.load(5, { shade: [0.5, "#5588AA"] });
+            //与后端交互
+            $.ajax({
+                type: "POST",
+                data: {
+                    drawing: drawing
+                },
+                dataType: "json",
+                url: "@Url.Action("SubDrawingDetail")",
+                success: function (result) {
+                    layer.closeAll("loading");
+                    if (result.Success)
+                    {
+                        layer.msg(result.Message, { icon: 1 });
+                        //parent.layer.closeAll();
+                    }
+                    else {
+                        layer.msg(result.Message, { icon: 2 });
+                    }
+                }
+            })
+        })
+
+
+        @*var drawing = '@Html.Raw(ViewBag.drawing)';
+
+        var jsonUser = JSON.parse(drawing );
+            if (jsonUser) {
+                if (jsonUser.User_rank === 1) {
+                    jsonUser.User_rank = "true";
+                }
+                else {
+                    jsonUser.User_rank = "false";
+                }
+            }
+
+            form.val("first", jsonUser);*@
+
+
+    })
+    </script>
+
+
+
+</body>
+
+
+
+</html>
+
+
