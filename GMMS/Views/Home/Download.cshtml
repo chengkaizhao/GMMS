@@ -1,0 +1,59 @@
+﻿<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312;no-cache">
+    <meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+    <meta name="ProgId" content="FrontPage.Editor.Document">
+    <title>MxDraw控件</title>
+</head>
+<body topmargin="0" leftmargin="0">
+    <p>
+        <input type="button" value="绘制直线" onclick="myclick()">
+    </p>
+    <p align="center">
+
+        <object classid="clsid:74A777F8-7A8F-4e7c-AF47-7074828086E2" id="MxDrawXCtrl" codebase="http://www.mxdraw.com/MxDrawX52.CAB#version=7.0.0.1" width=100% height=90%>
+            <param name="_Version" value="65536">
+            <param name="_ExtentX" value="24262">
+            <param name="_ExtentY" value="16219">
+            <param name="_StockProps" value="0">
+            <param name="IsRuningAtIE" value="1">
+            <param name="EnablePrintCmd" value="1">
+            <param name="ShowStatusBar" value="1">
+            <param name="ShowMenuBar" value="1">
+            <param name="ShowToolBars" value="1">
+            <param name="ShowCommandWindow" value="1">
+            <param name="ShowModelBar" value="1">
+            <param name="Iniset" value="AutoActive=N,LoadMrx=PropertyEditor">
+            <param name="ToolBarFiles" value="MxDraw-ToolBar.mxt,MxDraw-ToolBar-DrawParam.mxt,MxDraw-ToolBar-Draw.mxt,MxDraw-ToolBar-Edit.mxt">
+            <SPAN STYLE="color:red">不能装载CAD控件。请确认你可以连接网络或者检查浏览器的选项中安全设置。<a href="http://www.mxdraw.com/MxDrawX52.msi">http://www.mxdraw.com/MxDrawX52.msi 安载CAD控件</a></SPAN>
+        </object>
+        <script>
+            function myclick() {
+
+                //  下面的DoCommand(1)调用程序将跳到DoCommandEventFunc(iCmd)执行
+                document.getElementById("MxDrawXCtrl").DoCommand(1);
+            }
+            function DoCommandEventFunc(iCmd) {
+                if (iCmd == 1) {
+                    var mxOcx = document.all.item("MxDrawXCtrl");
+                    mxOcx.focus();
+                    var point1 = mxOcx.GetPoint(false, 0, 0, "\n 点取开始点:");
+                    if (point1 == null) {
+                        return;
+                    }
+                    var point2 = mxOcx.GetPoint(true, point1.x, point1.y, "\n 点取结束点:");
+                    if (point1 == null) {
+                        return;
+                    }
+                    // 直线的id
+                    var lineId = mxOcx.DrawLine(point1.x, point1.y, point2.x, point2.y);
+
+                    // 为新写的直线写一个字符串扩展数据
+                    var database = mxOcx.GetDatabase();
+                    var ent = database.ObjectIdToObject(lineId);
+                }
+            }
+            document.getElementById("MxDrawXCtrl").ImplementCommandEventFun = DoCommandEventFunc;
+        </script>
+    </p>
+</html>

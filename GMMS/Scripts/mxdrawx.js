@@ -1,0 +1,17 @@
+﻿document.write('<!-- 用来产生编辑状态的ActiveX控件的JS脚本-->   ');
+document.write('<!-- 因为微软的ActiveX新机制，需要一个外部引入的js-->   ');
+document.write('<object id="MxDrawXCtrl" classid="clsid:6EEC44E0-338B-408A-983E-B43E6F22B929"    ');
+document.write('codebase="mxdrawx.cab#version=3,0,0,0" width="100%" height="100%">   ');
+document.write('<param name="BorderStyle" value="1">   ');
+document.write('<param name="BorderColor" value="14402205">   ');
+document.write('<param name="TitlebarColor" value="15658734">   ');
+document.write('<param name="IsStrictNoCopy" value="0">   ');
+document.write('<param name="TitlebarTextColor" value="0">   ');
+document.write('<param name="Caption" value="梦想绘图控件示例演示 http://www.mxdaw.com">   ');
+document.write('<param name="MaxUploadSize" value="10000000">   ');
+document.write('<param name="MenubarColor" value="14402205">   ');
+document.write('<param name="MenuButtonColor" VALUE="16180947">   ');
+document.write('<param name="MenuBarStyle" value="3">   ');
+document.write('<param name="MenuButtonStyle" value="7">   ');
+document.write('<SPAN STYLE="color:red">不能装载文档控件。请在检查浏览器的选项中检查浏览器的安全设置。</SPAN>   ');
+document.write('</object>');
