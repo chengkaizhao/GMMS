@@ -65,7 +65,8 @@ namespace GMMS.Areas.User.Controllers
                         Drawing_author = drawing.Drawing_author,
                         Drawing_title = drawing.Drawing_title,
                         Drawing_time = DateTime.Now,
-                        Drawing_type=drawing.Drawing_type
+                        Drawing_type=drawing.Drawing_type,
+                        Drawing_mine=drawing.Drawing_mine,
                     };
                     context.Drawing.Add(addrawing);
                 }
@@ -76,6 +77,7 @@ namespace GMMS.Areas.User.Controllers
                     editDrawing.Drawing_author = drawing.Drawing_author;
                     editDrawing.Drawing_time = DateTime.Now;
                     editDrawing.Drawing_type = drawing.Drawing_type;
+                    editDrawing.Drawing_mine = drawing.Drawing_mine;
                 }
 
                 int flg = context.SaveChanges();
