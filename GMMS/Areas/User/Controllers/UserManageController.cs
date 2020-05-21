@@ -7,6 +7,7 @@ using GMMS.Controllers;
 using GMMS.EF;
 using GMMS.Areas.User.Models.User;
 using System.Data.Entity.Validation;
+using GMMS.Helper;
 
 namespace GMMS.Areas.User.Controllers
 {
@@ -69,7 +70,7 @@ namespace GMMS.Areas.User.Controllers
                     User_infor adduser = new User_infor()
                     {
                         User_name = user.User_name,
-                        User_pwd = user.User_pwd,
+                        User_pwd = MD5Encrypt.Encrypt(user.User_pwd),
                         User_rank = user.User_rank,
                         User_realname = user.User_realname,
                         UpdataTime = DateTime.Now
@@ -79,7 +80,7 @@ namespace GMMS.Areas.User.Controllers
                 else
                 {
                     editUser.User_name = user.User_name;
-                    editUser.User_pwd = user.User_pwd;
+                    editUser.User_pwd = MD5Encrypt.Encrypt(user.User_pwd);
                     editUser.User_realname = user.User_realname;
                     editUser.UpdataTime = DateTime.Now;
                 }
