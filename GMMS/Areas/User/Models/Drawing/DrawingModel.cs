@@ -35,6 +35,8 @@
         [StringLength(50)]
         public string Drawing_type { get; set; }
 
+        [StringLength(50)]
+        public string Drawing_mine { get; set; }
     }
 
   

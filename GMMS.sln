@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00", "00", "{9BB529C3-5760-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMMS.EF", "GMMS.EF\GMMS.EF.csproj", "{719F5781-AAAA-4826-8027-70E3347464F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMMS.Helper", "GMMS.Helper\GMMS.Helper.csproj", "{994E0BE9-DBC7-4594-8749-788DDE22D2A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,12 +31,17 @@ Global
 		{719F5781-AAAA-4826-8027-70E3347464F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{719F5781-AAAA-4826-8027-70E3347464F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{719F5781-AAAA-4826-8027-70E3347464F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{994E0BE9-DBC7-4594-8749-788DDE22D2A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{994E0BE9-DBC7-4594-8749-788DDE22D2A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{994E0BE9-DBC7-4594-8749-788DDE22D2A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{994E0BE9-DBC7-4594-8749-788DDE22D2A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{719F5781-AAAA-4826-8027-70E3347464F8} = {9BB529C3-5760-4390-A425-CB43BEB974C8}
+		{994E0BE9-DBC7-4594-8749-788DDE22D2A8} = {9BB529C3-5760-4390-A425-CB43BEB974C8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9F21F123-65FA-4B40-8F21-436C55198EB9}

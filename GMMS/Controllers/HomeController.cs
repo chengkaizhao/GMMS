@@ -2,6 +2,10 @@
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Mvc.Filters;
+using GMMS.Helper;
+using System.Drawing;
+using System.IO;
+using System.Drawing.Imaging;
 
 namespace GMMS.Controllers
 {
@@ -53,7 +57,7 @@ namespace GMMS.Controllers
                         Message = "当前用户不存在",
                     }, JsonRequestBehavior.AllowGet);
                 }
-                if (userPassword !=userinfo.User_pwd)
+                if ( MD5Encrypt.Encrypt (userPassword) !=userinfo.User_pwd)
                 {
                     return Json(new
                     {
@@ -77,5 +81,14 @@ namespace GMMS.Controllers
             }
 
         }
+        public ActionResult VerifyCode()
+        {
+            string verifyCode = string.Empty;
+            Bitmap bitmap = VerifyCodeHelper.CreateVerifyCode(out verifyCode);
+            MemoryStream memory = new MemoryStream();
+            bitmap.Save(memory, ImageFormat.Gif);
+            return File(memory.ToArray(), "image/gif");
+        }
+
     }
 }

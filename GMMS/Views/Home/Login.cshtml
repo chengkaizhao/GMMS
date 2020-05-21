@@ -125,6 +125,9 @@
     </style>
 </head>
 <body>
+
+
+    
     <div id="container">
         <div></div>
         <div class="admin-login-background">
@@ -138,10 +141,22 @@
                 </div>
                 <div>
                     <i class="layui-icon layui-icon-password admin-icon"></i>
-                    <input type="password" name="userPassword" placeholder="请输入密码" autocomplete="off" class="layui-input admin-input" >
+                    <input type="password" name="userPassword" placeholder="请输入密码" autocomplete="off" class="layui-input admin-input">
                 </div>
-                <button class="layui-btn admin-button" type="button"  lay-submit="" lay-filter="login">登录</button>
-            </form>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <img id="verifycode" style="height: 36px;
+                width: 108px;
+                margin-left: -15px;
+                margin-top: -8px;
+    cursor: pointer;" src="@Url.Action("VerifyCode")" />
+                    </label>
+                    <div class="layui-input-block">
+                        <input required lay-verify="required" name="VerifyCode" class="layui-input" type="text" placeholder="请输入验证码" autocomplete="off" />
+                    </div>
+                </div>
+                <button class="layui-btn admin-button" type="button" lay-submit="" lay-filter="login">登录</button>
+            </form> 
         </div>
     </div>
     @Scripts.Render("~/bundles/layui");
@@ -181,9 +196,14 @@
 
                     }
                 })
+            $("#verifycode").on("click", function () {
 
+
+                $("#verifycode").attr("src", "@Url.Action("VerifyCode")?" + Math.random());
+            })
                
             });
+
         });
     </script>
 </body>

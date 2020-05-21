@@ -25,6 +25,14 @@
             </div>
 
             <div class="layui-form-item">
+                <label class="layui-form-label">图件所属煤矿</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="Drawing_author" lay-verify="required" placeholder="请输入图件所属煤矿" autocomplete="off" class="layui-input">
+                </div>
+
+            </div>
+
+            <div class="layui-form-item">
                 <label class="layui-form-label">图件类型</label>
                 <div class="layui-input-block">
                     <input type="radio" name="Drawing_type" value="平面图" title="平面图" checked="">
@@ -33,23 +41,17 @@
                 </div>
             </div>
 
-            <div class="layui-form-item">
-                <label class="layui-form-label">真实姓名</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="User_realname" placeholder="请输入真实姓名" autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux"></div>
-            </div>
-
             <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
-                <legend>选完文件后不自动上传</legend>
+                <legend>请上传图件</legend>
             </fieldset>
 
             <div class="layui-upload">
                 <button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>
                 <button type="button" class="layui-btn" id="test9">开始上传</button>
             </div>
-
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                <legend></legend>
+            </fieldset>
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit lay-filter="sub">立即提交</button>
@@ -78,7 +80,7 @@
             $ = layui.$;
 
             //选完文件后不自动上传
-            @*upload.render({
+            upload.render({
                 elem: '#test8'
                 , url: "@Url.Action("UploadController/FilesUpload")" //改成您自己的上传接口
                 , auto: false
@@ -89,7 +91,7 @@
                     layer.msg('上传成功');
                     console.log(res)
                 }
-            });*@        
+            });        
         form.on("submit(sub)", function (obj) {
 
             console.log(obj);

@@ -341,6 +341,10 @@
       <Project>{719f5781-aaaa-4826-8027-70e3347464f8}</Project>
       <Name>GMMS.EF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GMMS.Helper\GMMS.Helper.csproj">
+      <Project>{994e0be9-dbc7-4594-8749-788dde22d2a8}</Project>
+      <Name>GMMS.Helper</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

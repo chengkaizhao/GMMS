@@ -33,7 +33,7 @@
     @section Scripts{
 
         <script type="text/javascript">
-       layui.use('table', function () {
+        layui.use('table', function () {
             var table = layui.table;
             var layer = layui.layer;
             var $ = layui.$;
@@ -50,7 +50,8 @@
                     { field: 'Drawing_title', title: '图件名称', width: 150, sort: true },
                     { field: 'Drawing_author', title: '图件作者', width: 150, sort: true },
                     { field: 'Drawing_time', title: '绘制时间', width: 200, sort: true },
-                    { field: 'Drawing_type', title: '图件类型', width: 200, sort: true },
+                    { field: 'Drawing_type', title: '图件类型', width: 150, sort: true },
+                    { field: 'Drawing_mine', title: '所属煤矿', width: 150, sort: true },
                     { title: '操作', width: 250, toolbar:"#tbar" }
                 ]]
            });
@@ -66,7 +67,7 @@
                    type: 2,
                    content:'@Url.Action("DrawingDetail")' ,
                    title: "添加图件",
-                   area: ["700px", "450px"],
+                   area: ["700px", "550px"],
                    end: function () { // layui 关闭弹框时的回调函数
                        $("#search").click();
                    }
@@ -81,7 +82,7 @@
            })
 
                //绑定table工具栏
-               table.on("tool(jsTabel)", function (obj) {
+                table.on("tool(jsTabel)", function (obj) {
                 var event = obj.event;
                 var data = obj.data;
                 if (event == "Del") {
@@ -113,7 +114,7 @@
                        type: 2,
                         content: '@Url.Action("DrawingDetail")?drawing_guid' + data.Drawing_id ,
                         title: "修改",
-                        area: ["700px", "450px"],
+                        area: ["700px", "550px"],
                         end: function () { // layui 关闭弹框时的回调函数
                             $("#search").click();
                         }
