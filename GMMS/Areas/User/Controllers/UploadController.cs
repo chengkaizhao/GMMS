@@ -19,12 +19,12 @@ namespace GMMS.Areas.User.Controllers
             if (Request.Files.Count > 0)
             {
                 HttpPostedFileBase f = Request.Files["file"];//最简单的获取方法
-                f.SaveAs(AppDomain.CurrentDomain.BaseDirectory + "/Image/" + f.FileName);//保存图片
+                f.SaveAs(AppDomain.CurrentDomain.BaseDirectory + "/images/" + f.FileName);//保存图片
 
                 //这下面是返回json给前端 
                 var data1 = new
                 {
-                    src = AppDomain.CurrentDomain.BaseDirectory + "/Image/" + f.FileName,//服务器储存路径
+                    src = AppDomain.CurrentDomain.BaseDirectory + "/images/" + f.FileName,//服务器储存路径
                 };
                 var Person = new
                 {
