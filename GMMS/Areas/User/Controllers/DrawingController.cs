@@ -128,11 +128,16 @@ namespace GMMS.Areas.User.Controllers
         /// <summary>
         /// 上传文件
         /// </summary>
-        public ActionResult File(HttpPostedFileBase file)
+        
+        [HttpPost]
+        public ActionResult File(HttpPostedFileWrapper file)
         {
-            string  filePath = Path.Combine(HttpContext.Server.MapPath("../images"),Path.GetFileName(file.FileName));
-            file.SaveAs(filePath);
+            file.SaveAs(Path.Combine(Server.MapPath("/images"), Path.GetFileName(file.FileName)));//用Server.MapPath获得相对路径的物理路径
             return Json("上传成功");
+
+            //string  filePath = Path.Combine(HttpContext.Server.MapPath("../images"),Path.GetFileName(file.FileName));
+            //file.SaveAs(filePath);
+            //return Json("上传成功");
 
             //HttpPostedFileBase f = Request.Files["file"];//最简单的获取方法
             //f.SaveAs(AppDomain.CurrentDomain.BaseDirectory + "/Image/" + f.FileName);//保存图片
