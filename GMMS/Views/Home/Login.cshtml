@@ -196,11 +196,14 @@
 
                     }
                 })
-               
-            });
-            $("#verifycode").on("click", function () { 
+            $("#verifycode").on("click", function () {
+
+
                 $("#verifycode").attr("src", "@Url.Action("VerifyCode")?" + Math.random());
             })
+               
+            });
+
         });
     </script>
 </body>

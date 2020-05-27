@@ -58,34 +58,34 @@ namespace GMMS.Controllers
                 object cacheobj = cache.Get(verifyCodeKey);
                 if (cacheobj == null)
                 {
-                    return Json(new LoginAjaxResult
+                    return Json(new 
                     {
-                        Result = (int)LoginResultEnum.VerifyCodeInvalid,
+                        success = false,
                         Message = "验证码已失效"
-                    });
+                    }, JsonRequestBehavior.AllowGet);
                 }// 不区分大小写 比较
                 else if (!(cacheobj.ToString().Equals(verifyCode, StringComparison.CurrentCultureIgnoreCase)))
                 {
-                    return Json(new LoginAjaxResult
+                    return Json(new 
                     {
-                        Result = (int)LoginResultEnum.WrongVerifyCode,
+                        success = false,
                         Message = "验证码错误"
-                    });
+                    }, JsonRequestBehavior.AllowGet);
                 }
                 cache.Remove(verifyCodeKey);
                 User_infor userinfo = context.User_infor.FirstOrDefault(u => u.User_name == userName);
 
                 if (userinfo == null)
                 {
-                    return Json(new
+                    return Json(new 
                     {
-                        Success = false,
+                        success = false,
                         Message = "当前用户不存在",
                     }, JsonRequestBehavior.AllowGet);
                 }
                 if ( MD5Encrypt.Encrypt (userPassword) !=userinfo.User_pwd)
                 {
-                    return Json(new
+                    return Json(new 
                     {
                         success = false,
                         Message = "密码错误",
@@ -96,7 +96,7 @@ namespace GMMS.Controllers
                 HttpContext.Session["CurentUser"] = userinfo;
                 HttpContext.Session.Timeout = 2;
 
-                return Json(new
+                return Json(new 
                 {
                     success = true,
                     Message = "登录成功",
