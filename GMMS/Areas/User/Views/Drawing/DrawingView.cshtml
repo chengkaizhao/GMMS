@@ -26,6 +26,7 @@
 
     <script type="text/html" id="tbar">
         <a class="layui-btn layui-btn-xs" lay-event="Edit">编辑</a>
+        <a class="layui-btn layui-btn-xs" lay-event="Upload">上传</a>
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="Del">删除</a>
         <a class="layui-btn layui-btn-xs" lay-event="Priview">预览</a>
         <a class="layui-btn layui-btn-xs" lay-event="Download">下载</a>
@@ -52,7 +53,7 @@
                     { field: 'Drawing_time', title: '绘制时间', width: 200, sort: true },
                     { field: 'Drawing_type', title: '图件类型', width: 150, sort: true },
                     { field: 'Drawing_mine', title: '所属煤矿', width: 150, sort: true },
-                    { title: '操作', width: 250, toolbar:"#tbar" }
+                    { title: '操作', width: 300, toolbar:"#tbar" }
                 ]]
            });
 
@@ -85,42 +86,58 @@
                 table.on("tool(jsTabel)", function (obj) {
                 var event = obj.event;
                 var data = obj.data;
-                if (event == "Del") {
-                    $.ajax({
-                        type: "POST",
-                        url: "@Url.Action("DelDrawing")",
-                        data: { drawingid: data.Drawing_id },
-                        beforeSend: function (XHR) {
-                            layer.load(5, { shade: [0.4, "#3352CC"] })
-                        },
-                        success: function (result) {
-                            if (result.Success == true) {
+                    if (event == "Del") {
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("DelDrawing")",
+                            data: { drawingid: data.Drawing_id },
+                            beforeSend: function (XHR) {
+                                layer.load(5, { shade: [0.4, "#3352CC"] })
+                            },
+                            success: function (result) {
+                                if (result.Success == true) {
+                                    $("#search").click();
+                                    layer.msg(result.Message, { icon: 1 });
+                                }
+                                else {
+                                    layer.msg(result.Message, { icon: 5 });
+                                }
+                            },
+                            complete: function () {
+                                layer.closeAll("loading");
+                            }
+                        })
+
+
+                    } else if (event === "Edit") {
+                        layer.open({
+                            type: 2,
+                            content: '@Url.Action("DrawingDetail")?drawing_guid' + data.Drawing_id,
+                            title: "修改",
+                            area: ["700px", "550px"],
+                            end: function () { // layui 关闭弹框时的回调函数
                                 $("#search").click();
-                                layer.msg(result.Message, { icon: 1 });
                             }
-                            else
-                            {
-                                layer.msg(result.Message, { icon: 5 });
+
+                        })
+                    } else if (event == "Upload") {
+
+                        layer.open({
+
+                            type: 2,
+                            content: '@Url.Action("Upload")',
+                            title: "文件上传",
+                            area: ["700px", "550px"],
+                            end: function () { // layui 关闭弹框时的回调函数
+                                $("#search").click();
                             }
-                        },
-                        complete: function () {
-                            layer.closeAll("loading");
-                        }
-                    })
-
-
-                } else if (event === "Edit") {
-                    layer.open({
-                       type: 2,
-                        content: '@Url.Action("DrawingDetail")?drawing_guid' + data.Drawing_id ,
-                        title: "修改",
-                        area: ["700px", "550px"],
-                        end: function () { // layui 关闭弹框时的回调函数
-                            $("#search").click();
                         }
 
-                })
-                }
+                        )
+
+
+
+                    }
             })
 
         });

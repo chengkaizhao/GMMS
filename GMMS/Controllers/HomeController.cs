@@ -6,6 +6,9 @@ using GMMS.Helper;
 using System.Drawing;
 using System.IO;
 using System.Drawing.Imaging;
+using System.Web.Caching;
+using GMMS.Models;
+using System;
 
 namespace GMMS.Controllers
 {
@@ -43,10 +46,33 @@ namespace GMMS.Controllers
         /// <param name="userName"></param>
         /// <param name="userPassword"></param>
         /// <returns></returns>
-        public ActionResult Enter (string userName, string userPassword)
+        public ActionResult Enter (string userName, string userPassword, string verifyCode)
         {
             using (Dbcontext context = new Dbcontext())
             {
+                // 第一步检验验证码
+                // 从缓存获取验证码作为校验基准  
+                // 先用当前类的全名称拼接上字符串 “verifyCode” 作为缓存的key
+                Cache cache = new Cache();
+                var verifyCodeKey = $"{this.GetType().FullName}_verifyCode";
+                object cacheobj = cache.Get(verifyCodeKey);
+                if (cacheobj == null)
+                {
+                    return Json(new LoginAjaxResult
+                    {
+                        Result = (int)LoginResultEnum.VerifyCodeInvalid,
+                        Message = "验证码已失效"
+                    });
+                }// 不区分大小写 比较
+                else if (!(cacheobj.ToString().Equals(verifyCode, StringComparison.CurrentCultureIgnoreCase)))
+                {
+                    return Json(new LoginAjaxResult
+                    {
+                        Result = (int)LoginResultEnum.WrongVerifyCode,
+                        Message = "验证码错误"
+                    });
+                }
+                cache.Remove(verifyCodeKey);
                 User_infor userinfo = context.User_infor.FirstOrDefault(u => u.User_name == userName);
 
                 if (userinfo == null)
@@ -85,6 +111,14 @@ namespace GMMS.Controllers
         {
             string verifyCode = string.Empty;
             Bitmap bitmap = VerifyCodeHelper.CreateVerifyCode(out verifyCode);
+
+            #region 缓存Key 
+            Cache cache = new Cache();
+            // 先用当前类的全名称拼接上字符串 “verifyCode” 作为缓存的key
+            var verifyCodeKey = $"{this.GetType().FullName}_verifyCode";
+            cache.Remove(verifyCodeKey);
+            cache.Insert(verifyCodeKey, verifyCode);
+            #endregion
             MemoryStream memory = new MemoryStream();
             bitmap.Save(memory, ImageFormat.Gif);
             return File(memory.ToArray(), "image/gif");

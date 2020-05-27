@@ -153,6 +153,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginAjaxResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +179,11 @@
     <Content Include="Areas\User\Views\UserManage\UserDetail.cshtml" />
     <Content Include="Areas\User\Views\Drawing\DrawingView.cshtml" />
     <Content Include="Areas\User\Views\Drawing\DrawingDetail.cshtml" />
+    <Content Include="Areas\User\Views\Drawing\Upload.cshtml" />
+    <Content Include="images\地形地质图.dwg" />
+    <Content Include="Areas\User\Views\Drawing\File.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -320,7 +326,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\User\Views\Upload\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
