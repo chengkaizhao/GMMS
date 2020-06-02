@@ -68,6 +68,7 @@ namespace GMMS.Areas.User.Controllers
                         Drawing_time = DateTime.Now,
                         Drawing_type=drawing.Drawing_type,
                         Drawing_mine=drawing.Drawing_mine,
+                        Drawing_url=drawing.Drawing_url,
                     };
                     context.Drawing.Add(addrawing);
                 }

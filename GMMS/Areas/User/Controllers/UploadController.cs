@@ -31,7 +31,7 @@ namespace GMMS.Areas.User.Controllers
                 {
                     code = 0,//0表示成功
                     msg = "",//这个是失败返回的错误
-                    data = data1
+                    data = data1.src.ToString()
                 };
                 return Json(Person);//格式化为json
             }

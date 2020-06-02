@@ -46,12 +46,15 @@
             </fieldset>
 
             <div class="layui-upload">
-                <button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>
-                <button type="button" class="layui-btn" id="test9">开始上传</button>
+                <button type="button" class="layui-btn layui-btn-normal" id="test0">选择文件</button>
+                <button type="button" class="layui-btn" id="test1">开始上传</button>
             </div>
             <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
                 <legend></legend>
             </fieldset>
+            <div class="layui-input-inline">
+                <input type="hidden" name="Drawing_url" autocomplete="off" class="layui-input">
+            </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit lay-filter="sub">立即提交</button>
@@ -76,14 +79,15 @@
 
             //选完文件后不自动上传
             upload.render({
-                elem: '#test8'
-                , url: "@Url.Action("FilesUpload","Upload")" //改成您自己的上传接口
+                elem: '#test0'
+                , url: "@Url.Action("FilesUpload","Upload")" //上传接口
                 , auto: false
                 //,multiple: true
-                , bindAction: '#test9'
-                ,exts: 'dwg|dwf|dwfx' //只允许上传压缩文件
+                , bindAction: '#test1'
+                ,exts: 'dwg|dwf|dwfx' //只允许上传CAD文件
                 , done: function (res) {
                     layer.msg('上传成功');
+                    $('input[name="Drawing_url"]').val(res.data);
                     console.log(res)
                 }
             });        
