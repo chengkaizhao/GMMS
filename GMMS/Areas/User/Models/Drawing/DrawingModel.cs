@@ -37,6 +37,8 @@
 
         [StringLength(50)]
         public string Drawing_mine { get; set; }
+        [StringLength(50)]
+        public string Drawing_url { get; set; }
     }
 
   
