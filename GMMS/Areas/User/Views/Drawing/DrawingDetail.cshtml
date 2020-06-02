@@ -27,7 +27,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">图件所属煤矿</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="Drawing_author" lay-verify="required" placeholder="请输入图件所属煤矿" autocomplete="off" class="layui-input">
+                    <input type="text" name="Drawing_mine" lay-verify="required" placeholder="请输入图件所属煤矿" autocomplete="off" class="layui-input">
                 </div>
 
             </div>
@@ -64,12 +64,7 @@
     </div>
 
     @Styles.Render("~/Scripts/css")
-    <script>
-        layui.use('upload', function () {
-            var $ = layui.jquery
-                , upload = layui.upload;
-            
-    </script>
+ 
     <script type="text/javascript">
             layui.use(['form', 'upload'], function () {
         var form = layui.form,
@@ -111,7 +106,7 @@
                     if (result.Success)
                     {
                         layer.msg(result.Message, { icon: 1 });
-                        //parent.layer.closeAll();
+                        parent.layer.closeAll();
                     }
                     else {
                         layer.msg(result.Message, { icon: 2 });
@@ -121,7 +116,7 @@
         })
 
 
-        @*var drawing = '@Html.Raw(ViewBag.drawing)';
+        var drawing = '@Html.Raw(ViewBag.drawing)';
 
         var jsonUser = JSON.parse(drawing );
             if (jsonUser) {
@@ -133,7 +128,7 @@
                 }
             }
 
-            form.val("first", jsonUser);*@
+            form.val("first", jsonUser);
 
 
     })

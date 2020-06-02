@@ -50,7 +50,7 @@
                         } },
                     { field: 'Drawing_title', title: '图件名称', width: 150, sort: true },
                     { field: 'Drawing_author', title: '图件作者', width: 150, sort: true },
-                    { field: 'Drawing_time', title: '绘制时间', width: 200, sort: true },
+                    //{ field: 'Drawing_time', title: '绘制时间', width: 200, sort: true },
                     { field: 'Drawing_type', title: '图件类型', width: 150, sort: true },
                     { field: 'Drawing_mine', title: '所属煤矿', width: 150, sort: true },
                     { title: '操作', width: 300, toolbar:"#tbar" }
@@ -112,7 +112,7 @@
                     } else if (event === "Edit") {
                         layer.open({
                             type: 2,
-                            content: '@Url.Action("DrawingDetail")?drawing_guid' + data.Drawing_id,
+                            content: '@Url.Action("DrawingDetail")?drawing_guid=' + data.Drawing_id,
                             title: "修改",
                             area: ["700px", "550px"],
                             end: function () { // layui 关闭弹框时的回调函数
